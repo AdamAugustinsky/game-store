@@ -59,5 +59,18 @@ public class PanacheCartRepository implements CartRepository {
 
         return panacheCart.toCart();
     }
+
+    @Override
+    public Cart increaseShippingPrice(long cartId, BigDecimal value) {
+        PanacheCart panacheCart = findPanacheEntityById(cartId);
+
+        panacheCart.shipping_price = panacheCart.shipping_price.add(value);
+
+        panacheCart.persist();
+
+        return panacheCart.toCart();
+    }
+
+
     
 }
