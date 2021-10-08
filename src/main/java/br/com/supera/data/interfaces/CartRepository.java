@@ -10,4 +10,5 @@ public interface CartRepository {
     Cart create();
     Cart addProduct(long cartId, AddProductDTO addProductDTO);
     Cart increaseShippingPrice(long cartId, BigDecimal value);
+    Cart removeProduct(long cartId, long productId);
 }
