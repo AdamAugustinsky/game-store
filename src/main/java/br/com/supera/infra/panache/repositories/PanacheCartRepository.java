@@ -31,9 +31,7 @@ public class PanacheCartRepository implements CartRepository {
     public Cart findById(long cartId) {
         PanacheCart panacheCart = PanacheCart.findById(cartId);
 
-        if (panacheCart == null)
-            return null;
-
+        if (panacheCart == null) return null;
         return panacheCart.toCart();
     }
 
@@ -63,6 +61,17 @@ public class PanacheCartRepository implements CartRepository {
         PanacheCart panacheCart = findPanacheEntityById(cartId);
 
         panacheCart.shipping_price = panacheCart.shipping_price.add(value);
+
+        panacheCart.persist();
+
+        return panacheCart.toCart();
+    }
+
+    @Override
+    public Cart decreaseShippingPrice(long cartId, BigDecimal value) {
+        PanacheCart panacheCart = findPanacheEntityById(cartId);
+
+        panacheCart.shipping_price = panacheCart.shipping_price.subtract(value);
 
         panacheCart.persist();
 
