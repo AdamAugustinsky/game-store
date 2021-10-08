@@ -31,9 +31,9 @@ public class PanacheCartRepository implements CartRepository {
     public Cart findById(long cartId) {
         PanacheCart panacheCart = PanacheCart.findById(cartId);
 
-        if(panacheCart == null)
+        if (panacheCart == null)
             return null;
-        
+
         return panacheCart.toCart();
     }
 
@@ -48,14 +48,12 @@ public class PanacheCartRepository implements CartRepository {
 
         return panacheCart.toCart();
     }
-    
+
     @Override
     public Cart addProduct(long cartId, AddProductDTO addProductDTO) {
         PanacheCart panacheCart = findPanacheEntityById(cartId);
 
-        panacheCart.products.add(
-            createPanacheProduct(addProductDTO)
-        );
+        panacheCart.products.add(createPanacheProduct(addProductDTO));
 
         return panacheCart.toCart();
     }
@@ -71,6 +69,13 @@ public class PanacheCartRepository implements CartRepository {
         return panacheCart.toCart();
     }
 
+    @Override
+    public Cart removeProduct(long cartId, long productId) {
+        PanacheCart panacheCart = findPanacheEntityById(cartId);
 
-    
+        panacheCart.products.removeIf(product -> product.id == productId);
+
+        return panacheCart.toCart();
+    }
+
 }
