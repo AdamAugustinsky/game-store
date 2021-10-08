@@ -10,7 +10,7 @@ import br.com.supera.infra.panache.repositories.PanacheCartRepository;
 @ApplicationScoped
 public class CreateCartService {
 
-    CreateCart createCart; 
+    private CreateCart createCart; 
 
     public CreateCartService() {
         PanacheCartRepository panacheCartRepository = new PanacheCartRepository();
