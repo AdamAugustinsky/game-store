@@ -41,7 +41,6 @@ public class RemoveProductTest {
         .contentType(ContentType.JSON)
         .when().delete("/cart/{cartId}/{productId}")
         .then()
-            .log().all()
             .statusCode(200);
     }
 
