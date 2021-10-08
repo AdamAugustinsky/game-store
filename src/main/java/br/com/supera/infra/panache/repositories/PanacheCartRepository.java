@@ -11,6 +11,32 @@ import br.com.supera.infra.panache.entities.PanacheProduct;
 
 public class PanacheCartRepository implements CartRepository {
 
+    private PanacheCart findPanacheEntityById(long cartId) {
+        return PanacheCart.findById(cartId);
+    }
+
+    private PanacheProduct createPanacheProduct(AddProductDTO addProductDTO) {
+        PanacheProduct panacheProduct = new PanacheProduct();
+        panacheProduct.name = addProductDTO.name;
+        panacheProduct.price = addProductDTO.price;
+        panacheProduct.score = addProductDTO.score;
+        panacheProduct.image = addProductDTO.image;
+
+        panacheProduct.persist();
+
+        return panacheProduct;
+    }
+
+    @Override
+    public Cart findById(long cartId) {
+        PanacheCart panacheCart = PanacheCart.findById(cartId);
+
+        if(panacheCart == null)
+            return null;
+        
+        return panacheCart.toCart();
+    }
+
     @Override
     public Cart create() {
         PanacheCart panacheCart = new PanacheCart();
@@ -22,4 +48,16 @@ public class PanacheCartRepository implements CartRepository {
 
         return panacheCart.toCart();
     }
+    
+    @Override
+    public Cart addProduct(long cartId, AddProductDTO addProductDTO) {
+        PanacheCart panacheCart = findPanacheEntityById(cartId);
+
+        panacheCart.products.add(
+            createPanacheProduct(addProductDTO)
+        );
+
+        return panacheCart.toCart();
+    }
+    
 }
