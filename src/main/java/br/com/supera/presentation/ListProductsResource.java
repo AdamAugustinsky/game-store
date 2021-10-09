@@ -3,7 +3,6 @@ package br.com.supera.presentation;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -48,8 +47,11 @@ public class ListProductsResource {
             schema = @Schema(implementation = ErrorResponse.class)
         )
     )
-    public Response listProducts(@PathParam("cartId") long cartId, @QueryParam("alphabetical_order") boolean alphabeticalOrder) {
-        List<Product> products = listProductsService.handle(cartId, alphabeticalOrder);
+    public Response listProducts(@PathParam("cartId") long cartId,
+        @QueryParam("alphabetical_order") boolean alphabeticalOrder,
+        @QueryParam("price_order") boolean priceOrder) {
+
+        List<Product> products = listProductsService.handle(cartId, alphabeticalOrder, priceOrder);
 
         return Response.ok(products).status(Status.OK).build();
     }
