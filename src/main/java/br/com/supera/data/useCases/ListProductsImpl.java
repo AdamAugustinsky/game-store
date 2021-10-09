@@ -19,7 +19,7 @@ public class ListProductsImpl implements ListProducts {
     }
 
     @Override
-    public List<Product> listAll(long cartId, boolean alphabeticalOrder, boolean priceOrder) {
+    public List<Product> listAll(long cartId, boolean alphabeticalOrder, boolean priceOrder, boolean scoreOrder) {
         Cart cart = cartRepository.findById(cartId);
 
         if(cart == null) 
@@ -31,6 +31,8 @@ public class ListProductsImpl implements ListProducts {
             return products.stream().sorted(Product.COMPARE_BY_NAME).collect(Collectors.toList());
         if(priceOrder)
             return products.stream().sorted(Product.COMPARE_BY_PRICE).collect(Collectors.toList());
+        if(scoreOrder)
+            return products.stream().sorted(Product.COMPARE_BY_SCORE).collect(Collectors.toList());
 
         return products;
     }
