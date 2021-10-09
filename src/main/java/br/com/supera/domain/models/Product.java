@@ -25,4 +25,13 @@ public class Product {
             return one.price.compareTo(other.price);
         }
     };
+
+    public static Comparator<Product> COMPARE_BY_SCORE = new Comparator<Product>() {
+        public int compare(Product one, Product other) {
+            Short oneScore = one.score;
+            Short otherScore = other.score;
+
+            return oneScore.compareTo(otherScore);
+        }
+    };
 }
