@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -24,7 +25,6 @@ import br.com.supera.shared.ErrorResponse;
 @Path("/cart")
 @Tag(name = "Cart")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class ListProductsResource {
 
     @Inject
@@ -48,8 +48,8 @@ public class ListProductsResource {
             schema = @Schema(implementation = ErrorResponse.class)
         )
     )
-    public Response addProduct(@PathParam("cartId") long cartId) {
-        List<Product> products = listProductsService.handle(cartId);
+    public Response listProducts(@PathParam("cartId") long cartId, @QueryParam("alphabetical_order") boolean alphabeticalOrder) {
+        List<Product> products = listProductsService.handle(cartId, alphabeticalOrder);
 
         return Response.ok(products).status(Status.OK).build();
     }
