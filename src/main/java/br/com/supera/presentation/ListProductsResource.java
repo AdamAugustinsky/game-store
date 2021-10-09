@@ -49,9 +49,11 @@ public class ListProductsResource {
     )
     public Response listProducts(@PathParam("cartId") long cartId,
         @QueryParam("alphabetical_order") boolean alphabeticalOrder,
-        @QueryParam("price_order") boolean priceOrder) {
+        @QueryParam("price_order") boolean priceOrder,
+        @QueryParam("score_order") boolean scoreOrder
+        ) {
 
-        List<Product> products = listProductsService.handle(cartId, alphabeticalOrder, priceOrder);
+        List<Product> products = listProductsService.handle(cartId, alphabeticalOrder, priceOrder, scoreOrder);
 
         return Response.ok(products).status(Status.OK).build();
     }
