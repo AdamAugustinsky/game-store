@@ -5,5 +5,8 @@ import java.util.List;
 import br.com.supera.domain.models.Product;
 
 public interface ListProducts {
-    List<Product> listAll(long cartId, boolean alphabeticalOrder);
+    List<Product> listAll(
+        long cartId,
+        boolean alphabeticalOrder,
+        boolean priceOrder);
 }
