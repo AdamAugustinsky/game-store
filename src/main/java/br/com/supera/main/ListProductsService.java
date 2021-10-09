@@ -19,8 +19,8 @@ public class ListProductsService {
         this.listProducts = new ListProductsImpl(panacheCartRepository);
     }
 
-    public List<Product> handle(long cartId) {
-        return listProducts.listAll(cartId);
+    public List<Product> handle(long cartId, boolean alphabeticalOrder) {
+        return listProducts.listAll(cartId, alphabeticalOrder);
     }
     
 }
