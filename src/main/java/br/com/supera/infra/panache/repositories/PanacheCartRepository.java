@@ -1,10 +1,13 @@
 package br.com.supera.infra.panache.repositories;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.supera.data.interfaces.CartRepository;
 import br.com.supera.domain.dtos.AddProductDTO;
 import br.com.supera.domain.models.Cart;
+import br.com.supera.domain.models.Product;
 import br.com.supera.infra.panache.entities.PanacheCart;
 import br.com.supera.infra.panache.entities.PanacheProduct;
 
@@ -61,6 +64,18 @@ public class PanacheCartRepository implements CartRepository {
         panacheCart.products.removeIf(product -> product.id == productId);
 
         return panacheCart.toCart();
+    }
+
+    @Override
+    public List<Product> listProducts(long cartId) {
+        PanacheCart panacheCart = findPanacheEntityById(cartId);
+
+        List<Product> products = panacheCart.products
+            .stream()
+            .map(product -> product.toProduct())
+            .collect(Collectors.toList());
+
+        return products;
     }
 
 }
