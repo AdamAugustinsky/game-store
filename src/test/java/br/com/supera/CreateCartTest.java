@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.equalTo;
 
 @QuarkusTest
 public class CreateCartTest {
@@ -17,7 +16,6 @@ public class CreateCartTest {
         .then()
             .statusCode(201)
             .body("id", notNullValue())
-            .body("shipping_price", equalTo(0))
             .body("products", notNullValue());
     }
 

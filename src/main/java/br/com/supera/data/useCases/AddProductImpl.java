@@ -1,7 +1,5 @@
 package br.com.supera.data.useCases;
 
-import java.math.BigDecimal;
-
 import javax.ws.rs.WebApplicationException;
 
 import br.com.supera.data.interfaces.CartRepository;
@@ -25,11 +23,7 @@ public class AddProductImpl implements AddProduct {
         if(cart == null) 
             throw new WebApplicationException("Cart not found", 404);
 
-        cartRepository.addProduct(cartId, addProductDTO);
-
-        Cart finalCart = cartRepository.increaseShippingPrice(cartId, new BigDecimal(10));
-
-        return finalCart;
+        return cartRepository.addProduct(cartId, addProductDTO);
     }
     
 }

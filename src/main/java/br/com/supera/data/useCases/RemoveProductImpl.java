@@ -1,7 +1,5 @@
 package br.com.supera.data.useCases;
 
-import java.math.BigDecimal;
-
 import javax.ws.rs.WebApplicationException;
 
 import br.com.supera.data.interfaces.CartRepository;
@@ -33,11 +31,7 @@ public class RemoveProductImpl implements RemoveProduct {
         if(!isProductInsideCart(cart, productId))
             throw new WebApplicationException("Product is not inside cart", 404);
 
-        cartRepository.removeProduct(cartId, productId);
-
-        Cart finalCart = cartRepository.decreaseShippingPrice(cartId, new BigDecimal(10));
-
-        return finalCart;
+        return cartRepository.removeProduct(cartId, productId);
     }
 
 }

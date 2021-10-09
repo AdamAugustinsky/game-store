@@ -1,6 +1,5 @@
 package br.com.supera.infra.panache.repositories;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import br.com.supera.data.interfaces.CartRepository;
@@ -39,7 +38,6 @@ public class PanacheCartRepository implements CartRepository {
     public Cart create() {
         PanacheCart panacheCart = new PanacheCart();
 
-        panacheCart.shipping_price = new BigDecimal(0);
         panacheCart.products = new ArrayList<PanacheProduct>();
 
         panacheCart.persist();
@@ -52,28 +50,6 @@ public class PanacheCartRepository implements CartRepository {
         PanacheCart panacheCart = findPanacheEntityById(cartId);
 
         panacheCart.products.add(createPanacheProduct(addProductDTO));
-
-        return panacheCart.toCart();
-    }
-
-    @Override
-    public Cart increaseShippingPrice(long cartId, BigDecimal value) {
-        PanacheCart panacheCart = findPanacheEntityById(cartId);
-
-        panacheCart.shipping_price = panacheCart.shipping_price.add(value);
-
-        panacheCart.persist();
-
-        return panacheCart.toCart();
-    }
-
-    @Override
-    public Cart decreaseShippingPrice(long cartId, BigDecimal value) {
-        PanacheCart panacheCart = findPanacheEntityById(cartId);
-
-        panacheCart.shipping_price = panacheCart.shipping_price.subtract(value);
-
-        panacheCart.persist();
 
         return panacheCart.toCart();
     }

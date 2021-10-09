@@ -1,6 +1,5 @@
 package br.com.supera.infra.panache.entities;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,8 +22,6 @@ public class PanacheCart extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    public BigDecimal shipping_price;
-    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     public List<PanacheProduct> products;
 
@@ -32,8 +29,6 @@ public class PanacheCart extends PanacheEntityBase {
         Cart cart = new Cart();
 
         cart.id = this.id;
-        if(this.shipping_price != null)
-            cart.shipping_price = this.shipping_price;
         if(this.products != null)
             cart.products = this.products
                 .stream()
