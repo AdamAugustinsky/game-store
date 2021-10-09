@@ -19,4 +19,10 @@ public class Product {
             return one.name.compareTo(other.name);
         }
     };
+
+    public static Comparator<Product> COMPARE_BY_PRICE = new Comparator<Product>() {
+        public int compare(Product one, Product other) {
+            return one.price.compareTo(other.price);
+        }
+    };
 }
