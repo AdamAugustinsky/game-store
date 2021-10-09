@@ -1,6 +1,7 @@
 package br.com.supera.data.useCases;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.WebApplicationException;
 
@@ -18,13 +19,18 @@ public class ListProductsImpl implements ListProducts {
     }
 
     @Override
-    public List<Product> listAll(long cartId) {
+    public List<Product> listAll(long cartId, boolean alphabeticalOrder) {
         Cart cart = cartRepository.findById(cartId);
 
         if(cart == null) 
             throw new WebApplicationException("Cart not found", 404);
 
-        return cartRepository.listProducts(cartId);
+        List<Product> products = cartRepository.listProducts(cartId);
+
+        if(alphabeticalOrder)
+            return products.stream().sorted(Product.COMPARE_BY_NAME).collect(Collectors.toList());
+
+        return products;
     }
     
 }
