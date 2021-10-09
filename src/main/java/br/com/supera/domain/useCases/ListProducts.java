@@ -8,5 +8,6 @@ public interface ListProducts {
     List<Product> listAll(
         long cartId,
         boolean alphabeticalOrder,
-        boolean priceOrder);
+        boolean priceOrder,
+        boolean scoreOrder);
 }
