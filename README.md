@@ -1,60 +1,162 @@
-# game-store Project
+# Game-Store project
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Este projeto foi feito utilizando Quarkus, devido à sua grande velocidade e baixo uso de memoria, saiba mais em https://quarkus.io/
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Como Executar a API
 
-## Running the application in dev mode
-
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
+Antes de executar a API, utilize o comando abaixo para criar o banco de dados postgres usando o docker
+```sh
+  docker-compose up -d
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
-
-## Packaging and running the application
-
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+Para executar os testes da APi, utilize o comando
+```sh
+  ./mvnw clean test
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
+Para executar a API em modo de desenvolvimento, utilize o comando
+```sh
+  ./mvnw quarkus:dev
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
+Para realizar o build da API, utilize o comando
+```sh
+  ./mvnw clean package
+```
+Após a execução, o arquivo .jar ficará disponível em /target/quarkus-app/quarkus-run.jar
+
+Saiba mais em https://quarkus.io/guides/maven-tooling
+
+## Documentação
+
+Para uma fácil interação com a API é possivel ir em http://localhost:8080/q/swagger-ui
+
+Ou utilizar o arquivo yaml com a documentação openapi gerada automaticamente em http://localhost:8080/q/openapi
+
+---
+
+Já existem 2 carrinhos de teste com produtos(ids: 1,2)
+
+Para começar a interagir com a API, crie um Carrinho utilizando a rota
+
+### POST /carts
+
+Request body
+```json
+{
+}
 ```
 
-You can then execute your native executable with: `./target/game-store-1.0.0-SNAPSHOT-runner`
+Response body
+```json
+{
+  "id": long,
+  "products": []
+}
+```
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
+---
 
-## Related Guides
+Adicione um produto ao carrinho
 
-- RESTEasy JAX-RS ([guide](https://quarkus.io/guides/rest-json)): REST endpoint framework implementing JAX-RS and more
+### PUT /carts/products/{cartId} <-- id do carrinho criado anteriormente
 
-## Provided Code
+Request body
+```json
+{
+  "image": "teste",
+  "name": "teste",
+  "price": 149.99,
+  "score": 10
+}
+```
 
-### RESTEasy JAX-RS
+Response body
+```json
+{
+  "id": 3,
+  "products": [
+    {
+      "id": 12,
+      "image": "teste",
+      "name": "teste",
+      "price": 149.99,
+      "score": 10
+    }
+  ]
+}
+```
 
-Easily start your RESTful Web Services
+---
 
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+Visualize o carrinho por completo
+
+### GET /carts/products/{cartId} <-- id do carrinho criado anteriormente
+
+Response body
+```json
+{
+  "id": 3,
+  "products": [
+    {
+      "id": 12,
+      "image": "teste",
+      "name": "teste",
+      "price": 149.99,
+      "score": 10
+    }
+  ]
+}
+```
+
+---
+
+Para organizar a visualização do carrinho em ordem alfabética, popularidade ou preço, utilize os query params na rota
+
+### GET /carts/products/{cartId}/?alphabetical_order=true&price_order=false&score_order=false
+
+Response body
+```json
+{
+  "id": 3,
+  "products": [
+    {
+      "id": 12,
+      "image": "teste",
+      "name": "teste",
+      "price": 149.99,
+      "score": 10
+    }
+  ]
+}
+```
+
+---
+
+Faça o checkout do carrinho
+
+### GET /carts/{cartId}/checkout <-- id do carrinho criado anteriormente
+
+Response body
+```json
+{
+  "shipping_price": 20,
+  "subtotal": 149.99,
+  "total": 169.99
+}
+```
+
+---
+
+Remova um produto indesejado do carrinho
+
+### DELETE /carts/products/{cartId}/{productId} <-- id do produto que deseja remover
+
+Response body
+```json
+{
+  "id": 3,
+  "products": [
+  ]
+}
+```
