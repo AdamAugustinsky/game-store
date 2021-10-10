@@ -20,8 +20,8 @@ import br.com.supera.domain.models.Cart;
 import br.com.supera.main.RemoveProductService;
 import br.com.supera.shared.ErrorResponse;
 
-@Path("/carts")
-@Tag(name = "Carts")
+@Path("/carts/products")
+@Tag(name = "Products")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class RemoveProductResource {
