@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -34,7 +34,7 @@ public class AddProductResource {
 
 
     @Path("/{cartId}")
-    @POST
+    @PUT
     @Transactional
     @APIResponse(
         responseCode = "201",
