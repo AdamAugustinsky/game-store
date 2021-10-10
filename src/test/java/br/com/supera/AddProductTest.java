@@ -16,10 +16,6 @@ public class AddProductTest {
 
     @Test
     public void createCart() {
-        //create new cart
-        given()
-        .when().post("/cart");
-
         JsonObject testProduct = Json.createObjectBuilder()
             .add("name", "test")
             .add("price", 10.0)
