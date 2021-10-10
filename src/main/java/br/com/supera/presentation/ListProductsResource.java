@@ -21,8 +21,8 @@ import br.com.supera.domain.models.Product;
 import br.com.supera.main.ListProductsService;
 import br.com.supera.shared.ErrorResponse;
 
-@Path("/cart")
-@Tag(name = "Cart")
+@Path("/carts")
+@Tag(name = "Carts")
 @Produces(MediaType.APPLICATION_JSON)
 public class ListProductsResource {
 

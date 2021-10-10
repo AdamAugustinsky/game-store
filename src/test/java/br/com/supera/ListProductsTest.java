@@ -16,7 +16,7 @@ public class ListProductsTest {
         given()
         .pathParam("cartId", 1)
         .contentType(ContentType.JSON)
-        .when().get("/cart/{cartId}")
+        .when().get("/carts/{cartId}")
         .then()
             .statusCode(200)
             .body(notNullValue());
@@ -27,7 +27,7 @@ public class ListProductsTest {
         given()
         .pathParam("cartId", -1)
         .contentType(ContentType.JSON)
-        .when().get("/cart/{cartId}")
+        .when().get("/carts/{cartId}")
         .then()
             .statusCode(404)
             .body(notNullValue());

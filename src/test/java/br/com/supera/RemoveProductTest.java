@@ -16,7 +16,7 @@ public class RemoveProductTest {
         .pathParam("cartId", 1)
         .pathParam("productId", 1)
         .contentType(ContentType.JSON)
-        .when().delete("/cart/{cartId}/{productId}")
+        .when().delete("/carts/{cartId}/{productId}")
         .then()
             .statusCode(200);
     }
@@ -27,7 +27,7 @@ public class RemoveProductTest {
         .pathParam("cartId", -1)
         .pathParam("productId", 1)
         .contentType(ContentType.JSON)
-        .when().delete("/cart/{cartId}/{productId}")
+        .when().delete("/carts/{cartId}/{productId}")
         .then()
             .statusCode(404);
     }
@@ -38,7 +38,7 @@ public class RemoveProductTest {
         .pathParam("cartId", 1)
         .pathParam("productId", -1)
         .contentType(ContentType.JSON)
-        .when().delete("/cart/{cartId}/{productId}")
+        .when().delete("/carts/{cartId}/{productId}")
         .then()
             .statusCode(404);
     }

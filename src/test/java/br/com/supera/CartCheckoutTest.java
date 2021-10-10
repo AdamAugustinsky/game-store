@@ -15,7 +15,7 @@ public class CartCheckoutTest {
     public void cartCheckout() {
         given()
         .pathParam("cartId", 2) .contentType(ContentType.JSON)
-        .when().get("/cart/{cartId}/checkout")
+        .when().get("/carts/{cartId}/checkout")
         .then()
             .statusCode(200)
             .body("shipping_price", equalTo(20))
@@ -28,7 +28,7 @@ public class CartCheckoutTest {
         given()
         .pathParam("cartId", 1)
         .contentType(ContentType.JSON)
-        .when().get("/cart/{cartId}/checkout")
+        .when().get("/carts/{cartId}/checkout")
         .then()
             .statusCode(200)
             .body("shipping_price", equalTo(0));
@@ -39,7 +39,7 @@ public class CartCheckoutTest {
         given()
         .pathParam("cartId", -2)
         .contentType(ContentType.JSON)
-        .when().get("/cart/{cartId}/checkout")
+        .when().get("/carts/{cartId}/checkout")
         .then()
             .statusCode(404);
     }

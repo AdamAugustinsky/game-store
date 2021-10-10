@@ -27,7 +27,7 @@ public class AddProductTest {
         .pathParam("cartId", 1)
         .body(testProduct.toString())
         .contentType(ContentType.JSON)
-        .when().put("/cart/{cartId}")
+        .when().put("/carts/{cartId}")
         .then()
             .statusCode(201)
             .body("products", notNullValue());
@@ -46,7 +46,7 @@ public class AddProductTest {
         .pathParam("cartId", 12)
         .body(testProduct)
         .contentType(ContentType.JSON)
-        .when().put("/cart/{cartId}")
+        .when().put("/carts/{cartId}")
         .then()
             .statusCode(404);
     }

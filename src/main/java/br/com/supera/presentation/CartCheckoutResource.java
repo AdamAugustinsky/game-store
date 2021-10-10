@@ -18,8 +18,8 @@ import br.com.supera.domain.dtos.CartCheckoutDTO;
 import br.com.supera.main.CartCheckoutService;
 import br.com.supera.shared.ErrorResponse;
 
-@Path("/cart")
-@Tag(name = "Cart")
+@Path("/carts")
+@Tag(name = "Carts")
 @Produces(MediaType.APPLICATION_JSON)
 public class CartCheckoutResource {
 

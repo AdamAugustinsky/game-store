@@ -12,7 +12,7 @@ public class CreateCartTest {
     @Test
     public void createCart() {
         given()
-        .when().post("/cart")
+        .when().post("/carts")
         .then()
             .statusCode(201)
             .body("id", notNullValue())

@@ -17,8 +17,8 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import br.com.supera.domain.models.Cart;
 import br.com.supera.main.CreateCartService;
 
-@Path("/cart")
-@Tag(name = "Cart")
+@Path("/carts")
+@Tag(name = "Carts")
 @Produces(MediaType.APPLICATION_JSON)
 public class CreateCartResource {
 
