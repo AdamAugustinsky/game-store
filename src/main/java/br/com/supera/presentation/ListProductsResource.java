@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -31,6 +32,7 @@ public class ListProductsResource {
 
     @Path("/{cartId}")
     @GET
+    @Operation(summary = "List the products of cart in PathParam, with options of sorting by alphatibetical, price or score order")
     @APIResponse(
         responseCode = "200",
         description = "Products listed succesfully",

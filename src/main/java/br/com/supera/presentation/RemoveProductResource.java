@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -34,6 +35,7 @@ public class RemoveProductResource {
     @Path("/{cartId}/{productId}")
     @DELETE
     @Transactional
+    @Operation(summary = "Remove the product in PathParam from the cart in PathParam")
     @APIResponse(
         responseCode = "200",
         description = "Product removed from cart",
