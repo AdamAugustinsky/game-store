@@ -50,7 +50,7 @@ Request body
 Response body
 ```json
 {
-  "id": long,
+  "id": 3,
   "products": []
 }
 ```
